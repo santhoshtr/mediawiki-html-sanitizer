@@ -1,0 +1,10 @@
+.svn
+*~
+*.kate-swp
+.*.swp
+.idea
+.bundle/
+*.log
+docs
+node_modules
+log/
