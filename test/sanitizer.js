@@ -3,7 +3,7 @@
 'use strict';
 
 const should = require( 'chai' ).should(),
-	Sanitizer = require( '../lib/Sanitizer' ).Sanitizer,
+	TokenSanitizer = require( '../lib/TokenSanitizer' ),
 	defines = require( '../lib/parser.defines' );
 
 var TagTk = defines.TagTk;
@@ -11,7 +11,7 @@ var TagTk = defines.TagTk;
 describe( 'Sanitizer', function () {
 	it( 'should sanitize attributes according to php\'s getAttribsRegex', function () {
 		let fakeEnv = {};
-		const sanitizer = new Sanitizer( fakeEnv );
+		const sanitizer = new TokenSanitizer( fakeEnv );
 		let name = 'testelement';
 		sanitizer.attrWhiteListCache[ name ] = new Set( [
 			'foo', 'עברית', '६', '搭𨋢', 'ńgh'
