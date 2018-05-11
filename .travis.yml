@@ -1,6 +1,2 @@
 language: node_js
-
-node_js:
-    # From the nvm docs, "this installs the latest version of node".
-    - "node"
-
+node_js: "node"
