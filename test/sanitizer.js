@@ -4,16 +4,15 @@
 
 const should = require( 'chai' ).should(),
 	TokenSanitizer = require( '../lib/TokenSanitizer' ),
-	defines = require( '../lib/parser.defines' );
+	Tokens = require( '../lib/Tokens' );
 
-var TagTk = defines.TagTk;
+var TagTk = Tokens.TagTk;
 
 describe( 'Sanitizer', function () {
 	it( 'should sanitize attributes according to php\'s getAttribsRegex', function () {
 		let fakeEnv = {};
-		const sanitizer = new TokenSanitizer( fakeEnv );
 		let name = 'testelement';
-		sanitizer.attrWhiteListCache[ name ] = new Set( [
+		TokenSanitizer.attrWhiteListCache[ name ] = new Set( [
 			'foo', 'עברית', '६', '搭𨋢', 'ńgh'
 		] );
 		let token = new TagTk( name );
@@ -23,7 +22,7 @@ describe( 'Sanitizer', function () {
 		token.setAttribute( '६', 'bar' );
 		token.setAttribute( '搭𨋢', 'bar' );
 		token.setAttribute( 'ńgh', 'bar' );
-		token = sanitizer.sanitizeToken( token );
+		token = TokenSanitizer.sanitizeToken( fakeEnv, token );
 		token.getAttribute( 'foo' ).should.equal( 'bar' );
 		should.equal( token.getAttribute( 'bar' ), null );
 		token.getAttribute( 'עברית' ).should.equal( 'bar' );
